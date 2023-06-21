@@ -5,13 +5,13 @@ $(document).ready(function (){
     // validate form and show stripe payment
     if($('#stripe-form').length > 0){
         // Disable the button
-        document.querySelector('#submit').disabled = true;
+        document.querySelector('#submit').disabled = false;
         $.ajax({
             method: 'POST',
             url: '/stripe/setup'
         })
         .done(async function(response){
-            var stripe = Stripe($('#stripePublicKey').val());
+            var stripe = Stripe("pk_test_51NKoJTF8Fi1BUmawFuIe9lFDVU8Zco8v22NTwlNwpQPrakUdHxTvkUc4U0cGpKpXBlUWad8mhzCJqyo6lQoQEjuT00yZEAKwFn");
 
             document
                 .querySelector('#payment-form')
