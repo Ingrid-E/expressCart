@@ -1,4 +1,4 @@
-describe('template spec', () => {
+describe('Login Cliente prueba end-to-end', () => {
   beforeEach(() => {
     cy.visit('/');
     cy.get('a[href="/customer/account"]').click();
@@ -8,6 +8,7 @@ describe('template spec', () => {
     cy.get('.form-signin-heading').should('contain', 'Please sign in');
     cy.get('#email').should('be.visible');
     cy.get('#password').should('be.visible');
+    cy.url().should('include', '/customer/login');
   })
   it('should show validation errors on empty form submission', () => {
     cy.get('#customerloginForm').click();

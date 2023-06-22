@@ -1,4 +1,4 @@
-describe('template spec', () => {
+describe('Admin Login end-to-end', () => {
   beforeEach(() => {
     cy.visit('/admin/login');
   });
@@ -7,6 +7,7 @@ describe('template spec', () => {
     cy.get('.form-signin-heading').should('contain', 'Please sign in');
     cy.get('#email').should('be.visible');
     cy.get('#password').should('be.visible');
+    cy.url().should('include', '/admin/login');
   })
   it('should show validation errors on empty form submission', () => {
     cy.get('#loginForm').click();
@@ -30,7 +31,6 @@ describe('template spec', () => {
     cy.get('#notify_message').should('contain', 'A user with that email does not exist.');
     cy.get('#notify_message').should('have.css', 'display', 'block');
   });
-
   it('should successfully log in with valid credentials', () => {
     cy.get('#email').type('test@test.com');
     cy.get('#password').type('123');

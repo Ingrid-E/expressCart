@@ -47,7 +47,6 @@ describe('POST /admin/settings/discount/update', () => {
   });
 
   it('Update Discount successful return 200', async () => {
-    // Mock the necessary functions and data
     const reqBody = {
       discountId: 'discountId',
       code: 'DISCOUNT123',
@@ -88,12 +87,9 @@ describe('POST /admin/settings/discount/update', () => {
     });
     expect(app.db.discounts.countDocuments).toBeCalledTimes(1);
     expect(app.db.discounts.updateOne).toBeCalledTimes(1);
-
   });
 
   it('Update Discount fails on valid schema return 400', async () => {
-
-    // Mock the necessary functions and data
     const reqBody = {
       discountId: 'discountId',
       code: 'DISCOUNT123',
@@ -128,7 +124,6 @@ describe('POST /admin/settings/discount/update', () => {
 
   it('Update Discount fails on start date is before current date return 400', async () => {
 
-    // Mock the necessary functions and data
     const reqBody = {
       discountId: 'discountId',
       code: 'DISCOUNT123',
@@ -167,7 +162,6 @@ describe('POST /admin/settings/discount/update', () => {
 
   it('Update Discount fails on end date is before start current date return 400', async () => {
 
-    // Mock the necessary functions and data
     const reqBody = {
       discountId: 'discountId',
       code: 'DISCOUNT123',
@@ -246,7 +240,6 @@ describe('POST /admin/settings/discount/update', () => {
 
   it('Update Discount fails discount code already exists return 400', async () => {
 
-    // Mock the necessary functions and data
     const reqBody = {
       discountId: 'discountId',
       code: 'DISCOUNT123',

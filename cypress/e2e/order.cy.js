@@ -28,7 +28,7 @@ let failCard = {
 }
 
 
-describe('template spec', () => {
+describe('Creación de orden end-to.end', () => {
   beforeEach(() => {
     cy.mockStripeAPI();
   });
@@ -36,12 +36,11 @@ describe('template spec', () => {
   it('order is success', () => {
 
     cy.intercept('POST', 'https://api.stripe.com/v1/payment_intents/*/confirm', (req) => {
-    req.reply({
+      req.reply({
         statusCode: 200,
         body: {}
       });
-  }).as('confirmPaymentIntent');
-
+    }).as('confirmPaymentIntent');
 
     cy.visit('/')
     cy.get('a.btn.btn-primary.add-to-cart').click()
@@ -81,7 +80,6 @@ describe('template spec', () => {
       });
     });
 
-
     cy.url().should('include', '/payment');
     cy.get('h2.text-success').should('contain', 'Your payment has been successfully processed');
     cy.get('h5.text-warning').should('contain', 'Please retain the details above as a reference of payment');
@@ -90,11 +88,11 @@ describe('template spec', () => {
   it('order fails on card', () => {
 
     cy.intercept('POST', 'https://api.stripe.com/v1/payment_intents/*/confirm', (req) => {
-    req.reply({
+      req.reply({
         statusCode: 402,
         body: {}
       });
-  }).as('failedPayment');
+    }).as('failedPayment');
 
     cy.visit('/')
     cy.get('a.btn.btn-primary.add-to-cart').click()
