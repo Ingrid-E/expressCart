@@ -1,16 +1,13 @@
-/* eslint-disable no-undef */
-/* eslint-disable quotes */
 context("add product description", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:1111/admin/product/new");
+    cy.visit("/admin/login");
   });
 
   it("type into product description input using a correct description", () => {
-    cy.get(".form-signin").within(() => {
-      cy.get('[name="email"]').type("jean123456789@hotmail.com");
-      cy.get('[type="submit"]').click();
-    });
-    cy.visit("http://localhost:1111/admin/product/new");
+    cy.get('#email').type('admin@test.com');
+    cy.get('#password').type('123');
+    cy.get('#loginForm').click();
+    cy.visit("/admin/product/new");
     cy.get("#productTitle").type("LLavero gato");
     cy.get("#productPrice").type("25.00");
     cy.get("#productGtin").type("123456");
@@ -26,10 +23,11 @@ context("add product description", () => {
 
   it("type into product description input using a description that have less than 25 characters", () => {
     cy.get(".form-signin").within(() => {
-      cy.get('[name="email"]').type("jean123456789@hotmail.com");
+      cy.get('[name="email"]').type("admin@test.com");
+      cy.get('[name="password"]').type("123");
       cy.get('[type="submit"]').click();
     });
-    cy.visit("http://localhost:1111/admin/product/new");
+    cy.visit("/admin/product/new");
     cy.get("#productTitle").type("LLavero gato");
     cy.get("#productPrice").type("25.00");
     cy.get("#productGtin").type("123456");
@@ -45,10 +43,11 @@ context("add product description", () => {
 
   it("leave the product description input empty", () => {
     cy.get(".form-signin").within(() => {
-      cy.get('[name="email"]').type("jean123456789@hotmail.com");
+      cy.get('[name="email"]').type("admin@test.com");
+      cy.get('[name="password"]').type("123");
       cy.get('[type="submit"]').click();
     });
-    cy.visit("http://localhost:1111/admin/product/new");
+    cy.visit("/admin/product/new");
     cy.get("#productTitle").type("LLavero gato");
     cy.get("#productPrice").type("25.00");
     cy.get("#productGtin").type("123456");

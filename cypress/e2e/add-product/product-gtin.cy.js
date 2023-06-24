@@ -2,15 +2,16 @@
 /* eslint-disable quotes */
 context("add product GTIN", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:1111/admin/product/new");
+    cy.visit("/admin/product/new");
   });
 
   it("type into product GTIN input using a correct serial number", () => {
     cy.get(".form-signin").within(() => {
-      cy.get('[name="email"]').type("jean123456789@hotmail.com");
+      cy.get('[name="email"]').type("admin@test.com");
+      cy.get('[name="password"]').type("123");
       cy.get('[type="submit"]').click();
     });
-    cy.visit("http://localhost:1111/admin/product/new");
+    cy.visit("/admin/product/new");
     cy.get("#productTitle").type("Camiseta estampada");
     cy.get("#productPrice").type("35.00");
     cy.get("#productGtin").type("e123456789");
@@ -26,10 +27,11 @@ context("add product GTIN", () => {
 
   it("type into product GTIN input using letters differents to e", () => {
     cy.get(".form-signin").within(() => {
-      cy.get('[name="email"]').type("jean123456789@hotmail.com");
+      cy.get('[name="email"]').type("admin@test.com");
+      cy.get('[name="password"]').type("123");
       cy.get('[type="submit"]').click();
     });
-    cy.visit("http://localhost:1111/admin/product/new");
+    cy.visit("/admin/product/new");
     cy.get("#productTitle").type("Camiseta estampada");
     cy.get("#productPrice").type("35.00");
     cy.get("#productGtin").type("4487ljs7");
@@ -44,10 +46,11 @@ context("add product GTIN", () => {
 
   it("type into product GTIN input using special caracters", () => {
     cy.get(".form-signin").within(() => {
-      cy.get('[name="email"]').type("jean123456789@hotmail.com");
+      cy.get('[name="email"]').type("admin@test.com");
+      cy.get('[name="password"]').type("123");
       cy.get('[type="submit"]').click();
     });
-    cy.visit("http://localhost:1111/admin/product/new");
+    cy.visit("/admin/product/new");
     cy.get("#productTitle").type("Camiseta estampada");
     cy.get("#productPrice").type("35.00");
     cy.get("#productGtin").type("12345/6789$");
@@ -62,10 +65,11 @@ context("add product GTIN", () => {
 
   it("type into product GTIN input using spaces", () => {
     cy.get(".form-signin").within(() => {
-      cy.get('[name="email"]').type("jean123456789@hotmail.com");
+      cy.get('[name="email"]').type("admin@test.com");
+      cy.get('[name="password"]').type("123");
       cy.get('[type="submit"]').click();
     });
-    cy.visit("http://localhost:1111/admin/product/new");
+    cy.visit("/admin/product/new");
     cy.get("#productTitle").type("Camiseta estampada");
     cy.get("#productPrice").type("35.00");
     cy.get("#productGtin").type("123 456 789");
@@ -80,10 +84,11 @@ context("add product GTIN", () => {
 
   it("type into product GTIN input using more than one letter e", () => {
     cy.get(".form-signin").within(() => {
-      cy.get('[name="email"]').type("jean123456789@hotmail.com");
+      cy.get('[name="email"]').type("admin@test.com");
+      cy.get('[name="password"]').type("123");
       cy.get('[type="submit"]').click();
     });
-    cy.visit("http://localhost:1111/admin/product/new");
+    cy.visit("/admin/product/new");
     cy.get("#productTitle").type("Camiseta estampada");
     cy.get("#productPrice").type("35.00");
     cy.get("#productGtin").type("e123e456789");
