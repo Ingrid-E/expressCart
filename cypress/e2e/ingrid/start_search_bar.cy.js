@@ -17,13 +17,13 @@ describe('Search Bar', () => {
 
 
   it('should display search results', () => {
-    const searchText = 'blusa';
+    const searchText = 'Collar';
 
     cy.get('input#frm_search')
       .type(searchText)
       .type('{enter}');
 
-    cy.get('a[data-id="6490f6e8c5355a2f54a1a551"]').should('be.visible');
+    cy.get('a[data-id="6494c86782032a5780b3f439"]').should('be.visible');
   });
 
   it('should display placeholder text', () => {
