@@ -13,7 +13,7 @@ describe('Login Cliente prueba end-to-end', () => {
   it('should show validation errors on empty form submission', () => {
     cy.get('#customerloginForm').click();
     cy.url().should('include', '/customer/login');
-    cy.get('#notify_message').should('contain', 'A customer with that email does not exist.');
+    cy.get('#notify_message').should('contain', 'Please input login data');
     cy.get('#notify_message').should('have.css', 'display', 'block');
   });
   
@@ -21,7 +21,7 @@ describe('Login Cliente prueba end-to-end', () => {
     cy.get('#email').type('invalidemail');
     cy.get('#customerloginForm').click();
     cy.url().should('include', '/customer/login');
-    cy.get('#notify_message').should('contain', 'A customer with that email does not exist.');
+    cy.get('#notify_message').should('contain', 'Invalid Email');
     cy.get('#notify_message').should('have.css', 'display', 'block');
   });
   it('should display error message for incorrect credentials', () => {

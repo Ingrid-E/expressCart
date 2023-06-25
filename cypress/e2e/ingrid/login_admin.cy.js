@@ -12,7 +12,7 @@ describe('Admin Login end-to-end', () => {
   it('should show validation errors on empty form submission', () => {
     cy.get('#loginForm').click();
     cy.url().should('include', '/admin/login');
-    cy.get('#notify_message').should('contain', 'A user with that email does not exist.');
+    cy.get('#notify_message').should('contain', 'Please input login data');
     cy.get('#notify_message').should('have.css', 'display', 'block');
   });
   
@@ -20,7 +20,7 @@ describe('Admin Login end-to-end', () => {
     cy.get('#email').type('invalidemail');
     cy.get('#loginForm').click();
     cy.url().should('include', '/admin/login');
-    cy.get('#notify_message').should('contain', 'A user with that email does not exist.');
+    cy.get('#notify_message').should('contain', 'Invalid Email');
     cy.get('#notify_message').should('have.css', 'display', 'block');
   });
   it('should display error message for incorrect credentials', () => {
@@ -28,7 +28,7 @@ describe('Admin Login end-to-end', () => {
     cy.get('#password').type('incorrectpassword');
     cy.get('#loginForm').click();
     cy.url().should('include', '/admin/login');
-    cy.get('#notify_message').should('contain', 'A user with that email does not exist.');
+    cy.get('#notify_message').should('contain', 'A customer with that email does not exist.');
     cy.get('#notify_message').should('have.css', 'display', 'block');
   });
   it('should successfully log in with valid credentials', () => {
