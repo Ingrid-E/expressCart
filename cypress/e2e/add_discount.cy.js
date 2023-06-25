@@ -1,3 +1,18 @@
+const getCurrentDateTime = () => {
+    const currentDate = new Date();
+    const day = String(currentDate.getDate()).padStart(2, '0');
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+    const year = currentDate.getFullYear();
+    let hours = String(currentDate.getHours()+1).padStart(2, '0');
+    let minutes = String(currentDate.getMinutes()+10).padStart(2, '0');
+    if(hours>23){
+        hours = String(0).padStart(2, '0');
+    }
+    return `${day}/${month}/${year} ${hours}:${minutes}`;
+  }
+  
+  const currentDateTime = getCurrentDateTime();
+
 describe('PF-007, Add discount code', () => {
 
     beforeEach(() => {
@@ -61,12 +76,12 @@ describe('PF-007, Add discount code', () => {
     })
 
     //Case 4: Put bad end date
-    it('Trying to add initial date that is before than start date', () => {
+    it('Trying to add end date that is before than start date', () => {
         cy.get('#discountCode').type('HalloweenDiscount01');
         cy.get('#discountType').select('Percent');
         cy.get('#discountValue').type('20');
         cy.get('#discountStart').click();
-        cy.get('#discountStart').type('20/06/2023 10:00');
+        cy.get('#discountStart').type(currentDateTime);
         cy.get('[style="display: block;"] > .gj-picker > .modal-footer > :nth-child(2)').click();
         cy.get('#discountEnd').click();
         cy.get('#discountEnd').type('19/06/2023 21:00');
@@ -81,7 +96,7 @@ describe('PF-007, Add discount code', () => {
         cy.get('#discountType').select('Percent');
         cy.get('#discountValue').type('20');
         cy.get('#discountStart').click();
-        cy.get('#discountStart').type('23/06/2023 10:00');
+        cy.get('#discountStart').type(currentDateTime);
         cy.get('[style="display: block;"] > .gj-picker > .modal-footer > :nth-child(2)').click();
         cy.get('#discountEnd').click();
         cy.get('#discountEnd').type('27/06/2023 21:00');
