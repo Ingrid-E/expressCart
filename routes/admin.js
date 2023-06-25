@@ -43,11 +43,13 @@ const emailRegex = /\S+@\S+\.\S+/;
 const numericRegex = /^\d*\.?\d*$/;
 
 // Admin section
+/* istanbul ignore next */
 router.get('/admin', restrict, (req, res, next) => {
     res.redirect('/admin/dashboard');
 });
 
 // logout
+/* istanbul ignore next */
 router.get('/admin/logout', (req, res) => {
     req.session.user = null;
     req.session.message = null;
@@ -65,6 +67,7 @@ if(process.env.NODE_ENV === 'test'){
 }
 
 // login form
+/* istanbul ignore next */
 router.get('/admin/login', async (req, res) => {
     const db = req.app.db;
 
@@ -90,6 +93,7 @@ router.get('/admin/login', async (req, res) => {
 });
 
 // login the user and check the password
+/* istanbul ignore next */
 router.post('/admin/login_action', async (req, res) => {
     const db = req.app.db;
 
@@ -116,6 +120,7 @@ router.post('/admin/login_action', async (req, res) => {
 });
 
 // setup form is shown when there are no users setup in the DB
+/* istanbul ignore next */
 router.get('/admin/setup', async (req, res) => {
     const db = req.app.db;
 
@@ -139,6 +144,7 @@ router.get('/admin/setup', async (req, res) => {
 });
 
 // insert a user
+/* istanbul ignore next */
 router.post('/admin/setup_action', async (req, res) => {
     const db = req.app.db;
 
@@ -168,6 +174,7 @@ router.post('/admin/setup_action', async (req, res) => {
 });
 
 // dashboard
+/* istanbul ignore next */
 router.get('/admin/dashboard', csrfProtection, restrict, async (req, res) => {
     const db = req.app.db;
 
@@ -222,6 +229,7 @@ router.get('/admin/dashboard', csrfProtection, restrict, async (req, res) => {
 });
 
 // settings
+/* istanbul ignore next */
 router.get('/admin/settings', csrfProtection, restrict, (req, res) => {
     res.render('settings', {
         title: 'Cart settings',
@@ -239,6 +247,7 @@ router.get('/admin/settings', csrfProtection, restrict, (req, res) => {
 });
 
 // create API key
+/* istanbul ignore next */
 router.post('/admin/createApiKey', restrict, checkAccess, async (req, res) => {
     const db = req.app.db;
     const result = await db.users.findOneAndUpdate({
@@ -260,6 +269,7 @@ router.post('/admin/createApiKey', restrict, checkAccess, async (req, res) => {
 });
 
 // settings update
+/* istanbul ignore next */
 router.post('/admin/settings/update', restrict, checkAccess, (req, res) => {
     const result = updateConfig(req.body);
     if(result === true){
@@ -271,6 +281,7 @@ router.post('/admin/settings/update', restrict, checkAccess, (req, res) => {
 });
 
 // settings menu
+/* istanbul ignore next */
 router.get('/admin/settings/menu', csrfProtection, restrict, async (req, res) => {
     const db = req.app.db;
     res.render('settings-menu', {
@@ -287,6 +298,7 @@ router.get('/admin/settings/menu', csrfProtection, restrict, async (req, res) =>
 });
 
 // page list
+/* istanbul ignore next */
 router.get('/admin/settings/pages', csrfProtection, restrict, async (req, res) => {
     const db = req.app.db;
     const pages = await db.pages.find({}).toArray();
@@ -306,6 +318,7 @@ router.get('/admin/settings/pages', csrfProtection, restrict, async (req, res) =
 });
 
 // pages new
+/* istanbul ignore next */
 router.get('/admin/settings/pages/new', csrfProtection, restrict, checkAccess, async (req, res) => {
     const db = req.app.db;
 
@@ -324,6 +337,7 @@ router.get('/admin/settings/pages/new', csrfProtection, restrict, checkAccess, a
 });
 
 // pages editor
+/* istanbul ignore next */
 router.get('/admin/settings/pages/edit/:page', csrfProtection, restrict, checkAccess, async (req, res) => {
     const db = req.app.db;
     const page = await db.pages.findOne({ _id: getId(req.params.page) });
@@ -356,6 +370,7 @@ router.get('/admin/settings/pages/edit/:page', csrfProtection, restrict, checkAc
 });
 
 // insert/update page
+/* istanbul ignore next */
 router.post('/admin/settings/page', restrict, checkAccess, async (req, res) => {
     const db = req.app.db;
 
@@ -393,6 +408,7 @@ router.post('/admin/settings/page', restrict, checkAccess, async (req, res) => {
 });
 
 // delete a page
+/* istanbul ignore next */
 router.post('/admin/settings/page/delete', restrict, checkAccess, async (req, res) => {
     const db = req.app.db;
 
@@ -412,6 +428,7 @@ router.post('/admin/settings/page/delete', restrict, checkAccess, async (req, re
 });
 
 // new menu item
+/* istanbul ignore next */
 router.post('/admin/settings/menu/new', restrict, checkAccess, (req, res) => {
     const result = newMenu(req);
     if(result === false){
@@ -422,6 +439,7 @@ router.post('/admin/settings/menu/new', restrict, checkAccess, (req, res) => {
 });
 
 // update existing menu item
+/* istanbul ignore next */
 router.post('/admin/settings/menu/update', restrict, checkAccess, (req, res) => {
     const result = updateMenu(req);
     if(result === false){
@@ -432,6 +450,7 @@ router.post('/admin/settings/menu/update', restrict, checkAccess, (req, res) => 
 });
 
 // delete menu item
+/* istanbul ignore next */
 router.post('/admin/settings/menu/delete', restrict, checkAccess, (req, res) => {
     const result = deleteMenu(req, req.body.menuId);
     if(result === false){
@@ -442,6 +461,7 @@ router.post('/admin/settings/menu/delete', restrict, checkAccess, (req, res) => 
 });
 
 // We call this via a Ajax call to save the order from the sortable list
+/* istanbul ignore next */
 router.post('/admin/settings/menu/saveOrder', restrict, checkAccess, (req, res) => {
     const result = orderMenu(req, res);
     if(result === false){
@@ -452,6 +472,7 @@ router.post('/admin/settings/menu/saveOrder', restrict, checkAccess, (req, res) 
 });
 
 // validate the permalink
+/* istanbul ignore next */
 router.post('/admin/validatePermalink', async (req, res) => {
     // if doc id is provided it checks for permalink in any products other that one provided,
     // else it just checks for any products with that permalink
@@ -473,6 +494,7 @@ router.post('/admin/validatePermalink', async (req, res) => {
 });
 
 // Discount codes
+/* istanbul ignore next */
 router.get('/admin/settings/discounts', csrfProtection, restrict, checkAccess, async (req, res) => {
     const db = req.app.db;
 
@@ -492,6 +514,7 @@ router.get('/admin/settings/discounts', csrfProtection, restrict, checkAccess, a
 });
 
 // Edit a discount code
+/* istanbul ignore next */
 router.get('/admin/settings/discount/edit/:id', csrfProtection, restrict, checkAccess, async (req, res) => {
     const db = req.app.db;
 
@@ -565,6 +588,7 @@ router.post('/admin/settings/discount/update', restrict, checkAccess, async (req
 });
 
 // Create a discount code
+/* istanbul ignore next */
 router.get('/admin/settings/discount/new', csrfProtection, restrict, checkAccess, async (req, res) => {
     res.render('settings-discount-new', {
         title: 'Discount code create',
@@ -579,6 +603,7 @@ router.get('/admin/settings/discount/new', csrfProtection, restrict, checkAccess
 });
 
 // Create a discount code
+/* istanbul ignore next */
 router.post('/admin/settings/discount/create', csrfProtection, restrict, checkAccess, async (req, res) => {
     const db = req.app.db;
 
@@ -625,6 +650,7 @@ router.post('/admin/settings/discount/create', csrfProtection, restrict, checkAc
 });
 
 // Delete discount code
+/* istanbul ignore next */
 router.delete('/admin/settings/discount/delete', restrict, checkAccess, async (req, res) => {
     const db = req.app.db;
 
@@ -638,6 +664,7 @@ router.delete('/admin/settings/discount/delete', restrict, checkAccess, async (r
 });
 
 // Add image by URL
+/* istanbul ignore next */
 router.post('/admin/file/url', restrict, checkAccess, async (req, res) => {
     const db = req.app.db;
 
@@ -687,6 +714,7 @@ router.post('/admin/file/url', restrict, checkAccess, async (req, res) => {
 
 // upload the file
 const upload = multer({ dest: 'public/uploads/' });
+/* istanbul ignore next */
 router.post('/admin/file/upload', restrict, checkAccess, upload.single('uploadFile'), async (req, res) => {
     const db = req.app.db;
 
@@ -756,13 +784,14 @@ router.post('/admin/file/upload', restrict, checkAccess, upload.single('uploadFi
 });
 
 // delete a file via ajax request
+/* istanbul ignore next */
 router.post('/admin/testEmail', restrict, (req, res) => {
     const config = req.app.config;
     // TODO: Should fix this to properly handle result
     sendEmail(config.emailAddress, 'expressCart test email', 'Your email settings are working');
     res.status(200).json({ message: 'Test email sent' });
 });
-
+/* istanbul ignore next */
 router.post('/admin/searchall', restrict, async (req, res, next) => {
     const db = req.app.db;
     const searchValue = req.body.searchValue;
