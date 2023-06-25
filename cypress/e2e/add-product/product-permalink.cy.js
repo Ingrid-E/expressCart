@@ -2,15 +2,15 @@
 /* eslint-disable no-undef */
 context("add product permalink", () => {
   beforeEach(() => {
-    cy.visit("/admin/product/new");
+    cy.visit('/admin/login');
+    cy.get('.form-signin').within(() => {
+      cy.get('[name="email"]').type('admin@test.com');
+      cy.get('[name="password"]').type('123');
+      cy.get('[type="submit"]').click();
+    });
   });
 
   it("type into product permalink input using a correct permalink", () => {
-    cy.get(".form-signin").within(() => {
-      cy.get('[name="email"]').type("admin@test.com");
-      cy.get('[name="password"]').type("123");
-      cy.get('[type="submit"]').click();
-    });
     cy.visit("/admin/product/new");
     cy.get("#productTitle").type("Collar gato");
     cy.get("#productPrice").type("50.00");
@@ -26,11 +26,6 @@ context("add product permalink", () => {
   });
 
   it("type into product permalink input using a permalink that exist already", () => {
-    cy.get(".form-signin").within(() => {
-      cy.get('[name="email"]').type("admin@test.com");
-      cy.get('[name="password"]').type("123");
-      cy.get('[type="submit"]').click();
-    });
     cy.visit("/admin/product/new");
     cy.get("#productTitle").type("Collar perro");
     cy.get("#productPrice").type("50.00");
@@ -45,11 +40,6 @@ context("add product permalink", () => {
   });
 
   it("type into product permalink input using spaces", () => {
-    cy.get(".form-signin").within(() => {
-      cy.get('[name="email"]').type("admin@test.com");
-      cy.get('[name="password"]').type("123");
-      cy.get('[type="submit"]').click();
-    });
     cy.visit("/admin/product/new");
     cy.get("#productTitle").type("Collar perro");
     cy.get("#productPrice").type("50.00");
