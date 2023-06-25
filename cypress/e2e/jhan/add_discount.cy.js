@@ -17,8 +17,8 @@ describe('PF-007, Add discount code', () => {
 
     beforeEach(() => {
         cy.visit('/admin/login');
-        cy.get('#email').type("shinhyejessi@gmail.com");
-        cy.get('#password').type("1234");
+        cy.get('#email').type("admin@test.com");
+        cy.get('#password').type("123");
         cy.get('#loginForm').click();
         cy.get('.mb-2 > :nth-child(4) > .nav-link').click();
         cy.get('.float-right > .btn').click();

@@ -2,8 +2,8 @@ describe('PF-008, Create an account', () => {
 
     beforeEach(() => {
         cy.visit('/admin/login');
-        cy.get('#email').type('shinhyejessi@gmail.com');
-        cy.get('#password').type('1234');
+        cy.get('#email').type('admin@test.com');
+        cy.get('#password').type('123');
         cy.get('#loginForm').click();
         cy.get(':nth-child(7) > .nav-link').click();
         cy.get('.float-right > .btn').click();
