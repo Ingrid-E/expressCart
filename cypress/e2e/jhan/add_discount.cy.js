@@ -1,17 +1,18 @@
 const getCurrentDateTime = () => {
     const currentDate = new Date();
-    const day = String(currentDate.getDate()).padStart(2, '0');
-    const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+    let day = String(currentDate.getDate()+1).padStart(2, '0');
+    const month = String(currentDate.getMonth()+1).padStart(2, '0');
     const year = currentDate.getFullYear();
-    let hours = String(currentDate.getHours()+1).padStart(2, '0');
+    let hours = String(currentDate.getHours()).padStart(2, '0');
     let minutes = String(currentDate.getMinutes()+10).padStart(2, '0');
-    if(hours>23){
-        hours = String(0).padStart(2, '0');
+    if(day>=30){
+        day = String(1).padStart(2, '0');
     }
     return `${day}/${month}/${year} ${hours}:${minutes}`;
   }
   
   const currentDateTime = getCurrentDateTime();
+  console.log(currentDateTime);
 
 describe('PF-007, Add discount code', () => {
 
