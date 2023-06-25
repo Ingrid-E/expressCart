@@ -43,7 +43,7 @@ describe('Creación de orden end-to.end', () => {
     }).as('confirmPaymentIntent');
 
     cy.visit('/')
-    cy.get('a.btn.btn-primary.add-to-cart').click()
+    cy.get(':nth-child(1) > .thumbnail > p.text-center > .btn').click()
     cy.get('a.btn.menu-btn').click();
     cy.visit('/checkout/information');
     cy.get('input[name="shipEmail"]').type(testUser.email);
@@ -95,7 +95,7 @@ describe('Creación de orden end-to.end', () => {
     }).as('failedPayment');
 
     cy.visit('/')
-    cy.get('a.btn.btn-primary.add-to-cart').click()
+    cy.get(':nth-child(1) > .thumbnail > p.text-center > .btn').click()
     cy.get('a.btn.menu-btn').click();
     cy.visit('/checkout/information');
     cy.get('input[name="shipEmail"]').type(testUser.email);

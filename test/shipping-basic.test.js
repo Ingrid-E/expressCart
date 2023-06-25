@@ -3,6 +3,7 @@ const shipping = require('../lib/modules/shipping-basic');
 describe('test shipping', () => {
   test('Free shipping due to amount greater than treshhold', () => {
     const amount = 200;
+    const config = {}
     const req = {
       session: {
         totalCartDiscount: 0,
@@ -10,7 +11,7 @@ describe('test shipping', () => {
         cartSubscription: null
       }
     };
-    shipping.calculateShipping(amount, req);
+    shipping.calculateShipping(amount,config, req);
     expect(req.session.totalCartShipping).toBe(0);
     expect(req.session.shippingMessage).toBe('FREE shipping');
     expect(req.session.totalCartAmount).toBe(2000);
@@ -18,6 +19,7 @@ describe('test shipping', () => {
 
   test('Free shipping due to subscription', () => {
     const amount = 200;
+    const config = {}
     const req = {
       session: {
         totalCartDiscount: 0,
@@ -25,7 +27,7 @@ describe('test shipping', () => {
         cartSubscription: true
       }
     };
-    shipping.calculateShipping(amount, req);
+    shipping.calculateShipping(amount,config, req);
     expect(req.session.totalCartShipping).toBe(0);
     expect(req.session.shippingMessage).toBe('FREE shipping');
     expect(req.session.totalCartAmount).toBe(2000);
@@ -33,13 +35,14 @@ describe('test shipping', () => {
 
   test('calculate shipping if the customer dont have country information', () => {
     const amount = 80;
+    const config = {}
     const req = {
       session: {
         totalCartDiscount: 0,
         totalCartAmount: 2000
       }
     };
-    shipping.calculateShipping(amount, req);
+    shipping.calculateShipping(amount,config, req);
     expect(req.session.totalCartShipping).toBe(10);
     expect(req.session.shippingMessage).toBe('Estimated shipping');
     expect(req.session.totalCartAmount).toBe(90);
@@ -47,6 +50,7 @@ describe('test shipping', () => {
 
   test('customer country is different to Australia', () => {
     const amount = 80;
+    const config = {}
     const req = {
       session: {
         totalCartDiscount: 0,
@@ -54,7 +58,7 @@ describe('test shipping', () => {
         customerCountry: 'Colombia'
       }
     };
-    shipping.calculateShipping(amount, req);
+    shipping.calculateShipping(amount,config, req);
     expect(req.session.totalCartShipping).toBe(25);
     expect(req.session.shippingMessage).toBe('International shipping');
     expect(req.session.totalCartAmount).toBe(105);
@@ -62,6 +66,7 @@ describe('test shipping', () => {
 
   test('customer country is different to Australia', () => {
     const amount = 80;
+    const config = {}
     const req = {
       session: {
         totalCartDiscount: 0,
@@ -69,7 +74,7 @@ describe('test shipping', () => {
         customerCountry: 'Australia'
       }
     };
-    shipping.calculateShipping(amount, req);
+    shipping.calculateShipping(amount,config, req);
     expect(req.session.totalCartShipping).toBe(10);
     expect(req.session.shippingMessage).toBe('Domestic shipping');
     expect(req.session.totalCartAmount).toBe(90);
